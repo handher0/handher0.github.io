@@ -1,4 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-01-07T19:11:21+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Handher0’s Blog</title><subtitle>A minimal and beautiful Jekyll theme best for writing and note-taking.</subtitle><author><name>손영웅</name></author><entry><title type="html">My Example Post</title><link href="http://localhost:4000/2016/05/20/my-example-post.html" rel="alternate" type="text/html" title="My Example Post" /><published>2016-05-20T00:00:00+09:00</published><updated>2016-05-20T00:00:00+09:00</updated><id>http://localhost:4000/2016/05/20/my-example-post</id><content type="html" xml:base="http://localhost:4000/2016/05/20/my-example-post.html"><![CDATA[<p>Eos eu docendi tractatos sapientem, brute option menandri in vix, quando vivendo accommodare te ius. Nec melius fastidii constituam id, viderer theophrastus ad sit, hinc semper periculis cum id. Noluisse postulant assentior est in, no choro sadipscing repudiandae vix. Vis in euismod delenit dignissim. Ex quod nostrum sit, suas decore animal id ius, nobis solet detracto quo te.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-01-07T20:15:45+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Handher0’s Blog</title><subtitle>A minimal and beautiful Jekyll theme best for writing and note-taking.</subtitle><author><name>손영웅</name></author><entry><title type="html">Jekyll 블로그 구축기: 왜 rbenv로 환경을 격리해야 하는가?</title><link href="http://localhost:4000/devops/ruby/2026/01/07/jekyll-setup-with-rbenv.html" rel="alternate" type="text/html" title="Jekyll 블로그 구축기: 왜 rbenv로 환경을 격리해야 하는가?" /><published>2026-01-07T19:00:00+09:00</published><updated>2026-01-07T19:00:00+09:00</updated><id>http://localhost:4000/devops/ruby/2026/01/07/jekyll-setup-with-rbenv</id><content type="html" xml:base="http://localhost:4000/devops/ruby/2026/01/07/jekyll-setup-with-rbenv.html"><![CDATA[<h2 id="1-서론-왜-단순-설치가-아닌-환경을-고민했는가">1. 서론: 왜 단순 설치가 아닌 ‘환경’을 고민했는가?</h2>
+
+<p>신입 백엔드/인프라 지망생으로서 블로그를 시작하며 가장 먼저 마주한 과제는 <strong>‘개발 환경 구축’</strong>이었습니다. 단순히 <code class="language-plaintext highlighter-rouge">gem install jekyll</code>을 입력해 블로그를 띄울 수도 있었지만, 저는 이 과정에서 발생할 수 있는 의존성 충돌과 시스템 오염을 방지하기 위한 <strong>공학적 접근</strong>을 시도했습니다.</p>
+
+<h2 id="2-문제-상황-gemfilepermissionerror와의-조우">2. 문제 상황: Gem::FilePermissionError와의 조우</h2>
+
+<p>처음 Bundler를 설치하려 할 때 다음과 같은 에러를 마주했습니다.
+<code class="language-plaintext highlighter-rouge">ERROR: While executing gem ... (Gem::FilePermissionError) You don't have write permissions for the /Library/Ruby/Gems/2.6.0 directory.</code></p>
+
+<h3 id="왜-발생했는가-root-cause-analysis">왜 발생했는가? (Root Cause Analysis)</h3>
+<p>macOS에는 시스템 운영을 위한 <strong>System Ruby</strong>가 내장되어 있습니다. <code class="language-plaintext highlighter-rouge">/Library/Ruby/</code> 경로는 OS의 핵심 영역이므로 일반 사용자에게 쓰기 권한이 제한되어 있습니다. 여기서 많은 초보자가 <code class="language-plaintext highlighter-rouge">sudo</code>를 사용하여 강제로 설치하곤 합니다.</p>
+
+<h3 id="왜-sudo는-해결책이-아닌가">왜 <code class="language-plaintext highlighter-rouge">sudo</code>는 해결책이 아닌가?</h3>
+<p>인프라를 공부하는 입장에서 <code class="language-plaintext highlighter-rouge">sudo</code>를 통한 전역 설치는 두 가지 큰 리스크를 가집니다.</p>
+<ol>
+  <li><strong>시스템 오염:</strong> OS가 사용하는 라이브러리와 내가 개발에 사용하는 라이브러리가 뒤섞여 예측 불가능한 시스템 오류를 야기할 수 있습니다.</li>
+  <li><strong>재현성 상실:</strong> 내 컴퓨터에서는 <code class="language-plaintext highlighter-rouge">sudo</code>로 해결했지만, 다른 환경(서버, 팀원의 로컬)에서 똑같은 환경을 복제하기 어렵습니다.</li>
+</ol>
+
+<h2 id="3-해결책-rbenv를-이용한-환경-격리">3. 해결책: rbenv를 이용한 환경 격리</h2>
+
+<p>저는 이 문제를 해결하기 위해 Ruby 버전 관리 도구인 <strong>rbenv</strong>를 도입했습니다.</p>
+
+<h3 id="rbenv의-동작-원리-shim">rbenv의 동작 원리: Shim</h3>
+<p>rbenv는 <code class="language-plaintext highlighter-rouge">Shim</code>이라는 메커니즘을 사용합니다. 사용자가 <code class="language-plaintext highlighter-rouge">ruby</code>나 <code class="language-plaintext highlighter-rouge">gem</code> 명령어를 입력하면, 실제 시스템 경로가 아닌 rbenv가 생성한 가짜 경로(Shim)가 이를 가로채서 우리가 지정한 특정 버전의 루비를 실행해줍니다.</p>
+
+<p>이를 통해 얻은 이득은 다음과 같습니다.</p>
+<ul>
+  <li><strong>권한 격리:</strong> 사용자 홈 디렉토리(<code class="language-plaintext highlighter-rouge">~/.rbenv</code>)에 루비를 설치하므로 <code class="language-plaintext highlighter-rouge">sudo</code>가 필요 없습니다.</li>
+  <li><strong>버전 유연성:</strong> 프로젝트별로 서로 다른 루비 버전을 사용할 수 있습니다.</li>
+</ul>
+
+<h2 id="4-또-다른-복병-bundler-버전-충돌">4. 또 다른 복병: Bundler 버전 충돌</h2>
+
+<p>루비 환경을 격리한 후에도 <code class="language-plaintext highlighter-rouge">Could not find compatible versions for gem "bundler"</code> 에러가 발생했습니다. 이는 프로젝트의 <code class="language-plaintext highlighter-rouge">Gemfile</code>이 요구하는 버전(2.x)과 시스템의 최신 버전(4.x)이 일치하지 않아 발생한 <strong>Semantic Versioning</strong> 문제입니다.</p>
+
+<h3 id="의존성-관리의-핵심-gemfilelock">의존성 관리의 핵심, Gemfile.lock</h3>
+<p>저는 이를 해결하기 위해 특정 버전을 지정하여 실행하거나, <code class="language-plaintext highlighter-rouge">bundle update --bundler</code>를 통해 프로젝트의 의존성 명세서를 갱신했습니다. 이 과정에서 <code class="language-plaintext highlighter-rouge">Gemfile.lock</code>이 단순한 로그 파일이 아니라, <strong>“어느 환경에서든 동일한 실행을 보장하는 실행 계약서”</strong>라는 점을 깊이 이해하게 되었습니다.</p>
+
+<h2 id="5-마치며-인프라-엔지니어의-자세">5. 마치며: 인프라 엔지니어의 자세</h2>
+
+<p>블로그 하나를 구축하는 과정이었지만, 그 안에는 <strong>환경 격리, 권한 관리, 의존성 일관성</strong>이라는 백엔드/인프라의 핵심 가치들이 녹아 있었습니다.</p>
+
+<ul>
+  <li><strong>최소한의 기술 스택:</strong> 화려한 프레임워크보다 문제 해결을 위한 최적의 도구(Hamilton Theme + rbenv)를 선택했습니다.</li>
+  <li><strong>문제 해결 능력:</strong> 에러 메시지 하나에서도 시스템 구조를 파악하고 근본적인 해결책을 찾으려 노력했습니다.</li>
+</ul>
+
+<p>앞으로 이 블로그에는 단순한 기술 나열이 아닌, 이런 공학적 고민들을 담아낼 예정입니다.</p>]]></content><author><name>손영웅</name></author><category term="DevOps" /><category term="Ruby" /><category term="Jekyll" /><category term="rbenv" /><category term="Bundler" /><category term="Environment-Isolation" /><summary type="html"><![CDATA[1. 서론: 왜 단순 설치가 아닌 ‘환경’을 고민했는가?]]></summary></entry><entry><title type="html">My Example Post</title><link href="http://localhost:4000/2016/05/20/my-example-post.html" rel="alternate" type="text/html" title="My Example Post" /><published>2016-05-20T00:00:00+09:00</published><updated>2016-05-20T00:00:00+09:00</updated><id>http://localhost:4000/2016/05/20/my-example-post</id><content type="html" xml:base="http://localhost:4000/2016/05/20/my-example-post.html"><![CDATA[<p>Eos eu docendi tractatos sapientem, brute option menandri in vix, quando vivendo accommodare te ius. Nec melius fastidii constituam id, viderer theophrastus ad sit, hinc semper periculis cum id. Noluisse postulant assentior est in, no choro sadipscing repudiandae vix. Vis in euismod delenit dignissim. Ex quod nostrum sit, suas decore animal id ius, nobis solet detracto quo te.</p>
 
 <p>No laudem altera adolescens has, volumus lucilius eum no. Eam ei nulla audiam efficiantur. Suas affert per no, ei tale nibh sea. Sea ne magna harum, in denique scriptorem sea, cetero alienum tibique ei eos. Labores persequeris referrentur eos ei.</p>]]></content><author><name>손영웅</name></author><summary type="html"><![CDATA[Eos eu docendi tractatos sapientem, brute option menandri in vix, quando vivendo accommodare te ius. Nec melius fastidii constituam id, viderer theophrastus ad sit, hinc semper periculis cum id. Noluisse postulant assentior est in, no choro sadipscing repudiandae vix. Vis in euismod delenit dignissim. Ex quod nostrum sit, suas decore animal id ius, nobis solet detracto quo te.]]></summary></entry><entry><title type="html">Some articles are just so long they deserve a really long title to see if things will break well</title><link href="http://localhost:4000/misc/2016/05/20/super-long-article.html" rel="alternate" type="text/html" title="Some articles are just so long they deserve a really long title to see if things will break well" /><published>2016-05-20T00:00:00+09:00</published><updated>2016-05-20T00:00:00+09:00</updated><id>http://localhost:4000/misc/2016/05/20/super-long-article</id><content type="html" xml:base="http://localhost:4000/misc/2016/05/20/super-long-article.html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.</p>
 
