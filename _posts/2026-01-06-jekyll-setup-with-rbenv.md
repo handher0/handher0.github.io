@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Jekyll 블로그 구축기: 왜 rbenv로 환경을 격리해야 하는가?"
-date: 2026-01-07 19:00:00 +0900
+date: 2026-01-06 19:00:00 +0900
 categories: [DevOps, Ruby]
 tags: [Jekyll, rbenv, Bundler, Environment-Isolation]
 toc: true
