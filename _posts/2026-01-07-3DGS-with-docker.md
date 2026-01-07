@@ -1,7 +1,7 @@
 ---
 layout: post
 title: GPU 서버에서 3D Gaussian Splatting으로 사진을 3D 모델로 만들기
-date: 2025-01-07
+date: 2026-01-07
 categories: [3d, ai]
 tags: [3dgs, nerf, nerfstudio, docker, cuda]
 ---
