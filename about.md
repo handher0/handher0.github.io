@@ -5,9 +5,9 @@ permalink: /about/
 ---
 
 # 손영웅
-
+<!--
 ## Backend/Clould Engineer
-
+-->
 ## Tech Spec
 Spring Boot, FastAPI
 
