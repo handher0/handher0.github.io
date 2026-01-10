@@ -1,4 +1,4 @@
-{% if site.avatar -%}
+{% if site.avatar and page.layout == "home" -%}
   <div class="sidebar-section">
     {%- if site.avatar contains "://" -%}
       {%- assign avatar = site.avatar -%}
