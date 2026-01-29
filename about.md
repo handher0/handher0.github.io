@@ -4,28 +4,31 @@ title: About
 permalink: /about/
 ---
 
-# 손영웅
-<!--
-## Backend/Clould Engineer
--->
-## Tech Spec
-Spring Boot, FastAPI
+Soongsil Univ. Computer Science and Engineering 21
+<br>
+handher0@naver.com
 
-## Education
-숭실대학교 컴퓨터학부 (2021.03 ~ 재학중)
+<br>
 
-## Certification
-- SQLD (2025.11)
-- 정보처리기사 (예정)
-- AWS SAA (예정)
-- TOIEC Speaking IH (예정)
+## Career
+- **Suresoft Tech** Software Developer Intern : `2026.03 ~ ing`
+
+<br>
 
 ## Experience
-- 피로그래밍 (2024.06 ~ 2025.02)
-- UMC Spingboot Challenger (2025.03 ~ 2025.08)
-- Google Developer Group (2024.09 ~ )
 - System Software Lab (2025.12 ~ )
+- Google Developer Group (2024.09 ~ )
+- UMC Spingboot Challenger (2025.03 ~ 2025.08)
+- 피로그래밍 (2024.06 ~ 2025.02)
 
-## Project
+
+<br>
+
+## Certificates
+- TOEIC Speaking IM2 : `2026.01`
+- SQLD : `2025.12`
+- 정보처리기사 (예정)
+- AWS SAA (예정)
 
 
+<br>
