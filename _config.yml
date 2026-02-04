@@ -12,6 +12,8 @@ plugins:
 
 paginate: 10
 
+intro: 공부하고 기록하는 블로그입니다.
+
 # Uncomment the below line and set the tracking ID for enabling Google Analytics
 # 
 # google_analytics: 

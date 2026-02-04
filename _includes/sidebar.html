@@ -32,12 +32,10 @@
   </ul>
 </div>
 
-{% if site.subscribe != false -%}
-<div class="sidebar-section feed-subscribe">
-  <a href="{{ 'feed.xml' | relative_url }}">
-    <i class="sidebar-icon fas fa-rss"></i><span>Subscribe</span>
-  </a>
-</div>
+{% if site.intro -%}
+  <div class="sidebar-section">
+    <p>{{ site.intro }}</p>
+  </div>
 {%- endif %}
 
 {% if site.data.social -%}
