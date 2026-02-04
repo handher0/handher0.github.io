@@ -2,7 +2,7 @@
 layout: post
 title: "코딩테스트 공부기록: 주제/문제/주간 정리"
 date: 2026-01-29 19:00:00 +0900
-categories: [coding-test]
+categories: [algorithm]
 tags: [algorithm, data-structure, practice]
 toc: true
 ---
@@ -33,3 +33,4 @@ toc: true
 ## 🧪 코드 스니펫
 ```python
 # 핵심 부분만
+```
