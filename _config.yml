@@ -1,5 +1,5 @@
-title: Heroic tales
-description: A minimal and beautiful Jekyll theme best for writing and note-taking.
+title: handher0 portfolio
+description: 구축부터 운영까지 책임지는 백엔드 엔지니어 손영웅의 포트폴리오
 author: 손영웅
 avatar: profile.png
 email: handher0@naver.com
@@ -12,7 +12,7 @@ plugins:
 
 paginate: 10
 
-intro: 공부하고 기록하는 블로그입니다.
+intro: Java·Spring으로 만들고, 클라우드에서 운영하고, AI를 시스템에 연결합니다.
 
 # Uncomment the below line and set the tracking ID for enabling Google Analytics
 # 
@@ -32,17 +32,12 @@ exclude:
 
 # Jekyll SEO Tag (Optional)
 # =========================
-twitter:
-  username: ngzhio
-  card: summary
 logo: logo.png
 image: /screenshot.png
 social:
-  name: Shangzhi Huang
+  name: 손영웅
   links:
-    - https://instagram.com/handher0
-    - https://www.facebook.com/ngzhio
-    - https://github.com/ngzhio
+    - https://github.com/handher0
 google_site_verification: u4WXQl0Eu66rsQo2kRdCNx
-lang: en
+lang: ko
 skin: midnight
