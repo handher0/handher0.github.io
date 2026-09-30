@@ -1,7 +1,7 @@
 title: handher0 portfolio
 description: 구축부터 운영까지 책임지는 백엔드 엔지니어 손영웅의 포트폴리오
 author: 손영웅
-avatar: profile.png
+# avatar: profile.png  (프로필 사진 제외 — 2026-09-30)
 email: handher0@naver.com
 
 plugins:
